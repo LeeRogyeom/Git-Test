@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery-3.6.0.min.js"></script>
+    <style>
+        h2 {
+            margin: 0px;
+        }
+        .Box {
+            border: 1px solid gray;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;;
+        }
+        span {
+            border: 1px solid blue;
+            border-radius: 3px;
+            padding: 3px;
+            margin: 3px;
+            background-color: lightgray;
+        }
+    </style>
+
+    <script>
+       function gid(id) {return document.getElementById(id);}
+
+        function spanClickHandler() {
+            let prentID = this.parentNode.getAttribute('id');
+            if(prentID == 'listDown') {
+                gid("listTodo").appendChild(this);
+            }
+            else {
+                gid("listDown").appendChild(this);
+            }
+
+        }
+        function keydwonHandler() {
+           
+            if(event.keyCode == 13) {
+               
+                //입역된 내용을 listToDo에 등록한다
+                let newitem = document.createElement("span");
+                newitem.innerHTML = this.value;
+                $(newitem).click(spanClickHandler);
+              gid("listTodo").appendChild(newitem);
+              this.value = "";
+            }
+        }
+
+        $(document).ready(function() {
+            $("span").click(spanClickHandler);
+            $("#newItem").keydown(keydwonHandler);
+        });
+    </script>
+</head>
+<body>
+    <h1>Todo List Project</h1>
+    <hr>
+     New: <input type="Text" id="newItem" size="50">
+    <hr>
+    <h2>ToDo</h2>
+    <div class="Box" id="listTodo">
+        <span>Korea</span>
+        <span>Jpen</span>
+        <span>China</span>
+        </div>
+        <h2>Down</h2>
+    <div class="Box" id="listDown"></div>
+</body>
+</html>
